@@ -1,1 +1,6 @@
 # PBO.tugasBesar
+
+Nanda     2018103703112
+Ricky     201810370311247
+Shofiyah  201810370311249
+Thesa     201810370311274
