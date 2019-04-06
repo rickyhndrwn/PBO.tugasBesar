@@ -1,5 +1,5 @@
 # PBO.tugasBesar
 # Ricky     201810370311247
-# Ananda     201810370311250
+# Ananda    201810370311250
 # Shofiyah  201810370311249
 # Thesa     201810370311274
