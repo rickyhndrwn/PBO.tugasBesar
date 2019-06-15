@@ -162,8 +162,8 @@ public class utama extends javax.swing.JFrame {
     private void StokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StokActionPerformed
         // TODO add your handling code here:
         dispose();
-        jumlahStok ds = new jumlahStok();
-        ds.setVisible(true);
+        Login lg = new Login();
+        lg.setVisible(true);
         
     }//GEN-LAST:event_StokActionPerformed
 

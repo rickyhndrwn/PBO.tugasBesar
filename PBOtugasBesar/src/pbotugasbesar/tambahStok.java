@@ -5,6 +5,16 @@
  */
 package pbotugasbesar;
 
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Thesa
@@ -14,8 +24,16 @@ public class tambahStok extends javax.swing.JFrame {
     /**
      * Creates new form tambahStok
      */
+     String[] data;
+     String url;
+     File file;
+     BufferedReader br;
+     FileWriter fw;
+     BufferedWriter bw;
+     DefaultTableModel modelTabelTambahStok;
     public tambahStok() {
         initComponents();
+        loadData();
     }
 
     /**
@@ -29,18 +47,19 @@ public class tambahStok extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fieldKodeStok = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        fieldNamaStok = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        fieldJumlahStok = new javax.swing.JTextField();
+        tTambah = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        fieldHargaStok = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        tabelTambahStok = new javax.swing.JTable();
+        tBatal = new javax.swing.JButton();
+        tSimpan = new javax.swing.JButton();
+        tUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,54 +68,86 @@ public class tambahStok extends javax.swing.JFrame {
 
         jLabel2.setText("KODE ");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField1.setText(" ");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        fieldKodeStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldKodeStok.setText(" ");
+        fieldKodeStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                fieldKodeStokActionPerformed(evt);
+            }
+        });
+        fieldKodeStok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldKodeStokKeyTyped(evt);
             }
         });
 
         jLabel3.setText("NAMA");
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.setText(" ");
+        fieldNamaStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldNamaStok.setText(" ");
 
         jLabel4.setText("JUMLAH");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField3.setText(" ");
+        fieldJumlahStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldJumlahStok.setText(" ");
+        fieldJumlahStok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldJumlahStokKeyTyped(evt);
+            }
+        });
 
-        jButton1.setText("TAMBAH");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tTambah.setText("TAMBAH");
+        tTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tTambahActionPerformed(evt);
             }
         });
 
         jLabel5.setText("HARGA");
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldHargaStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        fieldHargaStok.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fieldHargaStokKeyTyped(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelTambahStok.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Kode", "Nama", "Jumlah", "Harga"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
 
-        jButton2.setText("BATAL");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelTambahStok);
 
-        jButton3.setText("SIMPAN");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        tBatal.setText("BATAL");
+        tBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                tBatalActionPerformed(evt);
+            }
+        });
+
+        tSimpan.setText("SIMPAN");
+        tSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tSimpanActionPerformed(evt);
+            }
+        });
+
+        tUpdate.setText("UPDATE");
+        tUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tUpdateActionPerformed(evt);
             }
         });
 
@@ -111,34 +162,39 @@ public class tambahStok extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(42, 42, 42)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel2)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(fieldKodeStok, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                        .addComponent(jLabel3)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(fieldNamaStok, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(42, 42, 42)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel4)
+                                                    .addComponent(jLabel5)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(122, 122, 122)
+                                                .addComponent(jLabel1)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(122, 122, 122)
-                                        .addComponent(jLabel1)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField4)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))))))
+                                        .addComponent(tBatal)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tUpdate)
+                                        .addGap(33, 33, 33)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fieldHargaStok)
+                                    .addComponent(fieldJumlahStok, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                    .addComponent(tTambah, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(jButton3)))
+                        .addComponent(tSimpan)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -149,40 +205,151 @@ public class tambahStok extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldKodeStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldJumlahStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldNamaStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldHargaStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(tTambah)
+                    .addComponent(tBatal)
+                    .addComponent(tUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(tSimpan)
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void fieldKodeStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldKodeStokActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_fieldKodeStokActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void tTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tTambahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        boolean kSama = false, nSama = false;
+        for(int i = 0;i < tabelTambahStok.getRowCount();i++){
+            if(fieldKodeStok.getText().equals(tabelTambahStok.getValueAt(i, 0))){
+                kSama = true;
+            }
+            if(fieldNamaStok.getText().equals(tabelTambahStok.getValueAt(i, 1))){
+                nSama = true;
+            }
+        }
+        if(kSama){
+            JOptionPane.showMessageDialog(null, "Kode Barang Kembar!", "Perhatian", HEIGHT);
+        }
+        if(nSama){
+            JOptionPane.showMessageDialog(null, "Nama Barang Kembar!", "Perhatian", HEIGHT);
+        }
+        else if(!kSama && !nSama){
+            if(fieldKodeStok.getText().equals("") ||
+                    fieldNamaStok.getText().equals("") ||
+                    fieldJumlahStok.getText().equals("") ||
+                    fieldHargaStok.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Harap Lengkapi Data!", "Perhatian", HEIGHT);
+            }
+            else{
+                data[0] = fieldKodeStok.getText();
+                data[1] = fieldNamaStok.getText();
+                data[2] = fieldJumlahStok.getText();
+                data[3] = fieldHargaStok.getText();
+                
+                modelTabelTambahStok.addRow(data);
+                
+                fieldKodeStok.setText("");
+                fieldNamaStok.setText("");
+                fieldJumlahStok.setText("");
+                fieldHargaStok.setText("");
+            }
+        }
+    }//GEN-LAST:event_tTambahActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void tSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSimpanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        url = "src/Database/stok.txt";
+        file = new File(url);
+        try{
+            bw = new BufferedWriter(new FileWriter(file));
+            for(int i = 0;i < tabelTambahStok.getRowCount();i++){
+                for(int j = 0;j < tabelTambahStok.getColumnCount();j++){
+                    bw.write(tabelTambahStok.getValueAt(i, j).toString() + "\t");
+                }
+                bw.newLine();
+            }
+            bw.close();
+        }catch(IOException e){
+        }
+    }//GEN-LAST:event_tSimpanActionPerformed
+
+    private void fieldKodeStokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldKodeStokKeyTyped
+        // TODO add your handling code here:
+         if(!(Character.isDigit(evt.getKeyChar()))){
+            evt.consume();
+         }
+    }//GEN-LAST:event_fieldKodeStokKeyTyped
+
+    private void fieldJumlahStokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldJumlahStokKeyTyped
+        // TODO add your handling code here:
+         if(!(Character.isDigit(evt.getKeyChar()))){
+            evt.consume();
+         }
+    }//GEN-LAST:event_fieldJumlahStokKeyTyped
+
+    private void fieldHargaStokKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldHargaStokKeyTyped
+        // TODO add your handling code here:
+         if(!(Character.isDigit(evt.getKeyChar()))){
+            evt.consume();
+         }
+    }//GEN-LAST:event_fieldHargaStokKeyTyped
+
+    private void tBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBatalActionPerformed
+        // TODO add your handling code here:
+        fieldKodeStok.setText("");
+        fieldNamaStok.setText("");
+        fieldJumlahStok.setText("");
+        fieldHargaStok.setText("");
+    }//GEN-LAST:event_tBatalActionPerformed
+
+    private void tUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tUpdateActionPerformed
+        // TODO add your handling code here:
+        if(fieldKodeStok.getText().equals("") ||
+                fieldNamaStok.getText().equals("") ||
+                fieldJumlahStok.getText().equals("") ||
+                fieldHargaStok.getText().equals("") ){
+            JOptionPane.showMessageDialog(null, "Harap Lengkapi Data!", "Perhatian", HEIGHT);
+        }
+        if(tabelTambahStok.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
+        }
+        else{
+            data[0] = fieldKodeStok.getText();
+            data[1] = fieldNamaStok.getText();
+            data[2] = fieldJumlahStok.getText();
+            data[3] = fieldHargaStok.getText();
+            
+            int line = tabelTambahStok.getSelectedRow();
+            
+            modelTabelTambahStok.setValueAt(data[0], line, 0);
+            modelTabelTambahStok.setValueAt(data[1], line, 1);
+            modelTabelTambahStok.setValueAt(data[2], line, 2);
+            modelTabelTambahStok.setValueAt(data[3], line, 3);
+            
+            fieldKodeStok.setText("");
+            fieldNamaStok.setText("");
+            fieldJumlahStok.setText("");
+            fieldHargaStok.setText("");
+        }
+    }//GEN-LAST:event_tUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,19 +387,36 @@ public class tambahStok extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField fieldHargaStok;
+    private javax.swing.JTextField fieldJumlahStok;
+    private javax.swing.JTextField fieldKodeStok;
+    private javax.swing.JTextField fieldNamaStok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton tBatal;
+    private javax.swing.JButton tSimpan;
+    private javax.swing.JButton tTambah;
+    private javax.swing.JButton tUpdate;
+    private javax.swing.JTable tabelTambahStok;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        modelTabelTambahStok.getDataVector().removeAllElements();
+        url = "src/Database/stok.txt";
+        file = new File(url);
+        try{
+            br = new BufferedReader(new FileReader(file));
+            Object[] lData = br.lines().toArray();
+            
+            for (Object lData1 : lData) {
+                String[] data = lData1.toString().split("\t");
+                modelTabelTambahStok.addRow(data);
+            }
+        }catch(IOException e){
+        }
+    }
 }
