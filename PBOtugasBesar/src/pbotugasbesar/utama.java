@@ -31,7 +31,7 @@ public class utama extends javax.swing.JFrame {
         Pemesanan = new javax.swing.JButton();
         Stok = new javax.swing.JButton();
         dataPenyewa = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        search = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -65,10 +65,10 @@ public class utama extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
 
@@ -92,7 +92,7 @@ public class utama extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +138,7 @@ public class utama extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dataPenyewa, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
@@ -155,30 +155,30 @@ public class utama extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void StokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokMouseClicked
         // TODO add your handling code here:
         dispose();
-        jumlahStok js = jumlahStok();
+        jumlahStok js = new jumlahStok();
         js.setVisible(true);
     }//GEN-LAST:event_StokMouseClicked
 
     private void PemesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PemesananMouseClicked
         // TODO add your handling code here:
         dispose();
-        DETAIL dl = DETAIL();
+        DETAIL dl = new DETAIL();
         dl.setVisible(true);
     }//GEN-LAST:event_PemesananMouseClicked
 
     private void dataPenyewaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataPenyewaMouseClicked
         // TODO add your handling code here:
         dispose();
-        daftarSewa ds = daftarSewa();
+        daftarSewa ds = new daftarSewa();
         ds.setVisible(true);
     }//GEN-LAST:event_dataPenyewaMouseClicked
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,7 +219,6 @@ public class utama extends javax.swing.JFrame {
     private javax.swing.JButton Pemesanan;
     private javax.swing.JButton Stok;
     private javax.swing.JButton dataPenyewa;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -227,5 +226,7 @@ public class utama extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton search;
     // End of variables declaration//GEN-END:variables
 
+}

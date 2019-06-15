@@ -16,6 +16,8 @@ public class kasir extends javax.swing.JFrame {
      */
     public kasir() {
         initComponents();
+        
+        loadData();
     }
 
     /**
@@ -329,4 +331,9 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        
+       
+    }
 }
