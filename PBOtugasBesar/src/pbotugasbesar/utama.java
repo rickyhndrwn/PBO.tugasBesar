@@ -45,23 +45,23 @@ public class utama extends javax.swing.JFrame {
         jLabel1.setText("SCAFFOLDING RENT");
 
         Pemesanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cass.png"))); // NOI18N
-        Pemesanan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PemesananMouseClicked(evt);
+        Pemesanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PemesananActionPerformed(evt);
             }
         });
 
         Stok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home.png"))); // NOI18N
-        Stok.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                StokMouseClicked(evt);
+        Stok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StokActionPerformed(evt);
             }
         });
 
         dataPenyewa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rent.png"))); // NOI18N
-        dataPenyewa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dataPenyewaMouseClicked(evt);
+        dataPenyewa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataPenyewaActionPerformed(evt);
             }
         });
 
@@ -155,30 +155,32 @@ public class utama extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void StokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StokMouseClicked
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void StokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StokActionPerformed
         // TODO add your handling code here:
         dispose();
-        jumlahStok js = new jumlahStok();
-        js.setVisible(true);
-    }//GEN-LAST:event_StokMouseClicked
+        jumlahStok ds = new jumlahStok();
+        ds.setVisible(true);
+        
+    }//GEN-LAST:event_StokActionPerformed
 
-    private void PemesananMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PemesananMouseClicked
+    private void PemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PemesananActionPerformed
         // TODO add your handling code here:
         dispose();
         DETAIL dl = new DETAIL();
         dl.setVisible(true);
-    }//GEN-LAST:event_PemesananMouseClicked
+    }//GEN-LAST:event_PemesananActionPerformed
 
-    private void dataPenyewaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataPenyewaMouseClicked
+    private void dataPenyewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataPenyewaActionPerformed
         // TODO add your handling code here:
         dispose();
         daftarSewa ds = new daftarSewa();
         ds.setVisible(true);
-    }//GEN-LAST:event_dataPenyewaMouseClicked
-
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchActionPerformed
+        
+    }//GEN-LAST:event_dataPenyewaActionPerformed
 
     /**
      * @param args the command line arguments

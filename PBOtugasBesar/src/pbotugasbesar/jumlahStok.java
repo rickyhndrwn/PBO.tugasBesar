@@ -5,6 +5,16 @@
  */
 package pbotugasbesar;
 
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Thesa
@@ -14,8 +24,19 @@ public class jumlahStok extends javax.swing.JFrame {
     /**
      * Creates new form jumlahStok
      */
+    String url;
+    File file;
+    BufferedReader br;
+    FileWriter fw;
+    BufferedWriter bw;
+    DefaultTableModel modelTabelStok;
+    
     public jumlahStok() {
         initComponents();
+        
+        modelTabelStok = (DefaultTableModel)tabelStok.getModel();
+        
+        loadData();
     }
 
     /**
@@ -28,47 +49,54 @@ public class jumlahStok extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelStok = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addStok = new javax.swing.JButton();
+        updateStok = new javax.swing.JButton();
+        deleteStok = new javax.swing.JButton();
+        saveStok = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelStok.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Kode Barang", "Nama Barang", "Jumlah Stok", "Harga Barang"
             }
         ));
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
+        tabelStok.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tabelStok);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("DAFTAR STOK");
 
-        jButton1.setText("Add");
-
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addStok.setText("Add");
+        addStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addStokActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Delete");
-
-        jButton4.setText("Save");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        updateStok.setText("Update");
+        updateStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                updateStokActionPerformed(evt);
+            }
+        });
+
+        deleteStok.setText("Delete");
+        deleteStok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStokActionPerformed(evt);
+            }
+        });
+
+        saveStok.setText("Save");
+        saveStok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveStokActionPerformed(evt);
             }
         });
 
@@ -79,10 +107,10 @@ public class jumlahStok extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(updateStok)
+                    .addComponent(addStok, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteStok, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveStok, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -100,26 +128,38 @@ public class jumlahStok extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(addStok)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(updateStok)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(deleteStok)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)))
+                        .addComponent(saveStok)))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void updateStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStokActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_updateStokActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void saveStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStokActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        saveStok();
+    }//GEN-LAST:event_saveStokActionPerformed
+
+    private void addStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStokActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addStokActionPerformed
+
+    private void deleteStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStokActionPerformed
+        // TODO add your handling code here:
+        deleteStok();
+        
+    }//GEN-LAST:event_deleteStokActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,12 +197,55 @@ public class jumlahStok extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton addStok;
+    private javax.swing.JButton deleteStok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton saveStok;
+    private javax.swing.JTable tabelStok;
+    private javax.swing.JButton updateStok;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        modelTabelStok.getDataVector().removeAllElements();
+        url = "src/Database/stok.txt";
+        file = new File(url);
+        try{
+            br = new BufferedReader(new FileReader(file));
+            Object[] lData = br.lines().toArray();
+            
+            for (Object lData1 : lData) {
+                String[] data = lData1.toString().split("\t");
+                modelTabelStok.addRow(data);
+            }
+        }catch(IOException e){
+        }
+    }
+
+    private void deleteStok() {
+        if(tabelStok.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
+        }
+        else{
+            int line = tabelStok.getSelectedRow();
+            tabelStok.remove(line);
+        }
+    }
+
+    private void saveStok() {
+        url = "src/Database/stok.txt";
+        file = new File(url);
+        try{
+            bw = new BufferedWriter(new FileWriter(file));
+            for(int i = 0;i < tabelStok.getRowCount();i++){
+                for(int j = 0;j < tabelStok.getColumnCount();j++){
+                    bw.write(tabelStok.getValueAt(i, j).toString() + "\t");
+                }
+                bw.newLine();
+            }
+            bw.close();
+        }catch(IOException e){
+        }
+    }
+    
 }

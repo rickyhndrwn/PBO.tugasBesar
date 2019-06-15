@@ -17,7 +17,6 @@ public class kasir extends javax.swing.JFrame {
     public kasir() {
         initComponents();
         
-        loadData();
     }
 
     /**
@@ -47,7 +46,7 @@ public class kasir extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        Tambah = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
@@ -91,10 +90,7 @@ public class kasir extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Kode Barang", "Nama Barang", "Harga"
@@ -125,7 +121,12 @@ public class kasir extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("TAMBAH");
+        Tambah.setText("TAMBAH");
+        Tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TambahActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("CANCEL");
 
@@ -163,7 +164,7 @@ public class kasir extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                        .addComponent(Tambah))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +222,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)))
+                            .addComponent(Tambah)))
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -273,6 +274,10 @@ public class kasir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TambahActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,9 +314,9 @@ public class kasir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Tambah;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -332,8 +337,5 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
-    private void loadData() {
-        
-       
-    }
+    
 }
