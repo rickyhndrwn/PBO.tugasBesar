@@ -17,8 +17,10 @@ public class Login extends javax.swing.JFrame {
 
     /** Creates new form JumlahStok2 */
     public Login() {
-        
         initComponents();
+        
+        setLocationRelativeTo(this);
+        setResizable(false);
     }
 
     /** This method is called from within the constructor to
@@ -136,7 +138,9 @@ public class Login extends javax.swing.JFrame {
             if(user.equals(user1) && pass.equals(pass1)){
                 userText.setText("");
                 passText.setText("");
-                
+                dispose();
+                tambahStok ts = new tambahStok();
+                ts.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);

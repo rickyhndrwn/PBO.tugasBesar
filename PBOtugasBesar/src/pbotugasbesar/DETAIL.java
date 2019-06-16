@@ -16,6 +16,9 @@ public class DETAIL extends javax.swing.JFrame {
      */
     public DETAIL() {
         initComponents();
+        
+        setLocationRelativeTo(this);
+        setResizable(false);
     }
 
     /**

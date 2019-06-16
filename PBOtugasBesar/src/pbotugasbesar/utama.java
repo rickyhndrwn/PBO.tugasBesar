@@ -16,6 +16,9 @@ public class utama extends javax.swing.JFrame {
      */
     public utama() {
         initComponents();
+        
+        setLocationRelativeTo(this);
+        setResizable(false);
     }
 
     /**
@@ -162,8 +165,8 @@ public class utama extends javax.swing.JFrame {
     private void StokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StokActionPerformed
         // TODO add your handling code here:
         dispose();
-        Login lg = new Login();
-        lg.setVisible(true);
+        jumlahStok js = new jumlahStok();
+        js.setVisible(true);
         
     }//GEN-LAST:event_StokActionPerformed
 

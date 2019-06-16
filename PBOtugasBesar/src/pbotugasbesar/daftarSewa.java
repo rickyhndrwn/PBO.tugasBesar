@@ -16,6 +16,9 @@ public class daftarSewa extends javax.swing.JFrame {
      */
     public daftarSewa() {
         initComponents();
+        
+        setLocationRelativeTo(this);
+        setResizable(false);
     }
 
     /**

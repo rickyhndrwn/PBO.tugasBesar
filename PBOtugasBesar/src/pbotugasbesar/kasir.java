@@ -17,6 +17,8 @@ public class kasir extends javax.swing.JFrame {
     public kasir() {
         initComponents();
         
+        setLocationRelativeTo(this);
+        setResizable(false);
     }
 
     /**

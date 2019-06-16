@@ -33,6 +33,11 @@ public class tambahStok extends javax.swing.JFrame {
      DefaultTableModel modelTabelTambahStok;
     public tambahStok() {
         initComponents();
+        
+        setLocationRelativeTo(this);
+        setResizable(false);
+        
+        modelTabelTambahStok = (DefaultTableModel)tabelTambahStok.getModel();
         loadData();
     }
 
@@ -128,6 +133,7 @@ public class tambahStok extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tabelTambahStok.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tabelTambahStok);
 
         tBatal.setText("BATAL");
@@ -215,10 +221,11 @@ public class tambahStok extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(fieldHargaStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tTambah)
-                    .addComponent(tBatal)
-                    .addComponent(tUpdate))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tTambah, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tBatal)
+                        .addComponent(tUpdate)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -410,7 +417,7 @@ public class tambahStok extends javax.swing.JFrame {
         file = new File(url);
         try{
             br = new BufferedReader(new FileReader(file));
-            Object[] lData = br.lines().toArray();
+           Object[] lData = br.lines().toArray();
             
             for (Object lData1 : lData) {
                 String[] data = lData1.toString().split("\t");

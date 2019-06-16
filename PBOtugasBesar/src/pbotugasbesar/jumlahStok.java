@@ -34,6 +34,9 @@ public class jumlahStok extends javax.swing.JFrame {
     public jumlahStok() {
         initComponents();
         
+        setLocationRelativeTo(this);
+        setResizable(false);
+        
         modelTabelStok = (DefaultTableModel)tabelStok.getModel();
         
         loadData();
@@ -168,8 +171,8 @@ public class jumlahStok extends javax.swing.JFrame {
     private void updateStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStokActionPerformed
         // TODO add your handling code here:
         dispose();
-        tambahStok ts = new tambahStok();
-        ts.setVisible(true);
+        Login lg = new Login();
+        lg.setVisible(true);
     }//GEN-LAST:event_updateStokActionPerformed
 
     /**
