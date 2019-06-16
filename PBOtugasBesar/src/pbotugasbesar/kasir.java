@@ -5,6 +5,7 @@
  */
 package pbotugasbesar;
 
+import java.awt.HeadlessException;
 import static java.awt.image.ImageObserver.HEIGHT;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +13,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,6 +48,11 @@ public class kasir extends javax.swing.JFrame {
         modelTabelDaftarBarang = (DefaultTableModel)tabelDaftarBarang.getModel();
         modelTabelKasir = (DefaultTableModel)tabelKasir.getModel();
         data = new String[4];
+        
+        Date tanggal = new Date();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyy");
+        
+        textTanggalPesanKasir.setText(df.format(tanggal));
         
         loadData();
     }
@@ -89,7 +98,7 @@ public class kasir extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SCAFFOLDING RENT");
 
-        jLabel2.setText("NAMA");
+        jLabel2.setText("NAMA:");
 
         fieldNamaKasir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldNamaKasir.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +107,7 @@ public class kasir extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("JUMLAH");
+        jLabel3.setText("JUMLAH:");
 
         fieldJumlahKasir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldJumlahKasir.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +116,7 @@ public class kasir extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("NO. REG");
+        jLabel4.setText("NO. REG:");
 
         fieldNoRegKasir.setText(" ");
         fieldNoRegKasir.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +173,7 @@ public class kasir extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("KODE");
+        jLabel9.setText("KODE:");
 
         fieldKodeKasir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         fieldKodeKasir.setText(" ");
@@ -281,7 +290,7 @@ public class kasir extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tombolPesan, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                .addComponent(tombolPesan, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                 .addGap(129, 129, 129))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -307,19 +316,20 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(fieldJumlahKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(fieldNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(textTanggalPesanKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textTanggalPesanKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(fieldNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textTanggalKembaliKasir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                                    .addComponent(jLabel9)
-                                    .addComponent(fieldKodeKasir)
-                                    .addComponent(jLabel6))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fieldKodeKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -334,7 +344,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                             .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tombolPesan)
                             .addComponent(tombolClear))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -378,7 +388,6 @@ public class kasir extends javax.swing.JFrame {
     private void tomboltombolTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tomboltombolTambahActionPerformed
         // TODO add your handling code here:
         klikTombolTambah();
-        //kalo tombol tambah kepilih tanpa pemilihan barang muncul error
     }//GEN-LAST:event_tomboltombolTambahActionPerformed
 
     private void tombolKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolKembaliActionPerformed
@@ -394,41 +403,10 @@ public class kasir extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelDaftarBarangMouseClicked
 
     private void tombolCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolCancelActionPerformed
-        // TODO add your handling code here:
-        int jKembali = 0, hKembali = 0;
-        String kKembali = "";
-        if(tabelKasir.getSelectedRow() == -1){
-            tombolCancel.setEnabled(false);
-        //            JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
-        }
-        else{
-            tombolCancel.setEnabled(true);
-            int line = tabelKasir.getSelectedRow();
-            jKembali = Integer.parseInt(tabelKasir.getValueAt(line, 2).toString());
-            hKembali = Integer.parseInt(tabelKasir.getValueAt(line, 3).toString());
-            kKembali = tabelKasir.getValueAt(line, 0).toString();
-       
-            for(int i = 0;i < tabelDaftarBarang.getRowCount();i++){
-                if(kKembali.equals(modelTabelDaftarBarang.getValueAt(i, 0))){
-                    int dataAwal = Integer.parseInt(modelTabelDaftarBarang.getValueAt(i, 3).toString());
-                    
-                    int sKembali = dataAwal + jKembali;
-                        
-                    String data2 = Integer.toString(sKembali);
-                    
-                    modelTabelDaftarBarang.setValueAt(data2, i, 3);
-                }
-            }
-            total -= hKembali;
-            textTotal.setText("Rp. " + total);
-            modelTabelKasir.removeRow(line);
-            saveData();
-        }
-        tombolCancel.setEnabled(false);
-        saveData();
-    //tombol cancel cuma kepake sekali, kalo mau cancel untuk
-    //kedua kalinya malah disable
+        klikTombolCancel();
     }//GEN-LAST:event_tombolCancelActionPerformed
+
+    
 
     /**
      * @param args the command line arguments
@@ -517,6 +495,7 @@ public class kasir extends javax.swing.JFrame {
     }
 
     private void klikTombolTambah() {
+        
         String[] data2 = new String[4];
         String kodeBarang = fieldKodeKasir.getText();
         String stringJumlahBarang = fieldJumlahKasir.getText();
@@ -526,9 +505,6 @@ public class kasir extends javax.swing.JFrame {
         boolean ada = false;
         if(kodeBarang.equals("") || stringJumlahBarang.equals("") || fieldNamaKasir.equals("")){
             JOptionPane.showMessageDialog(null, "Harap Lengkapi Data!", "Perhatian", HEIGHT);
-            hargaBarang = 0;
-            stokBarang = 0;
-            baris = 0;
         }
         else{
             for(int i = 0;i < tabelDaftarBarang.getRowCount();i++){
@@ -577,6 +553,37 @@ public class kasir extends javax.swing.JFrame {
             bw.close();
         }catch(IOException e){
         }
+    }
+    
+    public void klikTombolCancel() throws NumberFormatException, HeadlessException {
+        int jKembali = 0, hKembali = 0;
+        String kKembali = "";
+        if(tabelKasir.getSelectedRow() == -1){
+            JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
+        }
+        else{
+            int line = tabelKasir.getSelectedRow();
+            jKembali = Integer.parseInt(tabelKasir.getValueAt(line, 2).toString());
+            hKembali = Integer.parseInt(tabelKasir.getValueAt(line, 3).toString());
+            kKembali = tabelKasir.getValueAt(line, 0).toString();
+            
+            for(int i = 0;i < tabelDaftarBarang.getRowCount();i++){
+                if(kKembali.equals(modelTabelDaftarBarang.getValueAt(i, 0))){
+                    int dataAwal = Integer.parseInt(modelTabelDaftarBarang.getValueAt(i, 2).toString());
+                    
+                    int sKembali = dataAwal + jKembali;
+                    
+                    String data2 = Integer.toString(sKembali);
+                    
+                    modelTabelDaftarBarang.setValueAt(data2, i, 2);
+                }
+            }
+            total -= hKembali;
+            textTotal.setText("Rp. " + total);
+            modelTabelKasir.removeRow(line);
+            saveData();
+        }
+        saveData();
     }
 
 }

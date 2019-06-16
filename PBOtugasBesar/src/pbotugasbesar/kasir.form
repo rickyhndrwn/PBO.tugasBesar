@@ -81,7 +81,7 @@
                               <Component id="textTotal" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="tombolPesan" pref="163" max="32767" attributes="0"/>
+                              <Component id="tombolPesan" pref="159" max="32767" attributes="0"/>
                               <EmptySpace min="129" pref="129" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -116,20 +116,22 @@
                           <Component id="fieldJumlahKasir" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fieldNamaKasir" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="textTanggalPesanKasir" alignment="0" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="fieldNamaKasir" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="textTanggalKembaliKasir" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" max="-2" attributes="0">
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="fieldKodeKasir" alignment="3" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="fieldKodeKasir" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -150,7 +152,7 @@
                           <Component id="textTotal" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="tombolPesan" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="tombolClear" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -175,7 +177,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NAMA"/>
+        <Property name="text" type="java.lang.String" value="NAMA:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -192,7 +194,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="JUMLAH"/>
+        <Property name="text" type="java.lang.String" value="JUMLAH:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldJumlahKasir">
@@ -207,7 +209,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NO. REG"/>
+        <Property name="text" type="java.lang.String" value="NO. REG:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldNoRegKasir">
@@ -302,7 +304,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="KODE"/>
+        <Property name="text" type="java.lang.String" value="KODE:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldKodeKasir">
