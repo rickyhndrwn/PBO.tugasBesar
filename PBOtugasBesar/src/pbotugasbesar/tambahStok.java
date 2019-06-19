@@ -40,6 +40,7 @@ public class tambahStok extends javax.swing.JFrame {
         data = new String[4];
         
         modelTabelTambahStok = (DefaultTableModel)tabelTambahStok.getModel();
+        
         loadData();
     }
 
@@ -77,7 +78,6 @@ public class tambahStok extends javax.swing.JFrame {
         jLabel2.setText("KODE ");
 
         fieldKodeStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        fieldKodeStok.setText(" ");
         fieldKodeStok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldKodeStokActionPerformed(evt);
@@ -92,12 +92,10 @@ public class tambahStok extends javax.swing.JFrame {
         jLabel3.setText("NAMA");
 
         fieldNamaStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        fieldNamaStok.setText(" ");
 
         jLabel4.setText("JUMLAH");
 
         fieldJumlahStok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        fieldJumlahStok.setText(" ");
         fieldJumlahStok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 fieldJumlahStokKeyTyped(evt);

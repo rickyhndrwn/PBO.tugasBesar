@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
                 ts.setVisible(true);
             }
             else{
-                JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
+                JOptionPane.showMessageDialog(null, "username atau password salah", "Perhatian", HEIGHT);
             }
         }
     }//GEN-LAST:event_tLoginActionPerformed

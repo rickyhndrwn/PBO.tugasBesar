@@ -5,6 +5,10 @@
  */
 package pbotugasbesar;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Thesa
@@ -132,7 +136,12 @@ public class utama extends javax.swing.JFrame {
     private void PemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PemesananActionPerformed
         // TODO add your handling code here:
         dispose();
-        kasir k = new kasir();
+        kasir k = null;
+        try {
+            k = new kasir();
+        } catch (ParseException ex) {
+            Logger.getLogger(utama.class.getName()).log(Level.SEVERE, null, ex);
+        }
         k.setVisible(true);
     }//GEN-LAST:event_PemesananActionPerformed
 

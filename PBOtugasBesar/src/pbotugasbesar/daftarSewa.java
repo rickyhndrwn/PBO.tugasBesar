@@ -6,6 +6,13 @@
 package pbotugasbesar;
 
 import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,12 +25,24 @@ public class daftarSewa extends javax.swing.JFrame {
     /**
      * Creates new form daftarSewa
      */
+    String[] data;
+    String url;
+    File file;
+    BufferedReader br;
+    BufferedWriter bw;
+    FileWriter fw;
+    String nama, stringTanggal;
+    
     DefaultTableModel modelTabelDaftarPenyewa;
     public daftarSewa() {
         initComponents();
         
         setLocationRelativeTo(this);
         setResizable(false);
+        
+        data = new String[4];
+        modelTabelDaftarPenyewa = (DefaultTableModel)tabelDaftarPenyewa.getModel();
+        loadData();
     }
 
     /**
@@ -36,28 +55,17 @@ public class daftarSewa extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelDaftarPenyewa = new javax.swing.JTable();
-        tEdit = new javax.swing.JButton();
         tDelete = new javax.swing.JButton();
         tDetail = new javax.swing.JButton();
         tKembali = new javax.swing.JButton();
+        tSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("DAFTAR PENYEWA");
-
-        jTextField1.setText(" ");
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         tabelDaftarPenyewa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,17 +75,21 @@ public class daftarSewa extends javax.swing.JFrame {
                 "Nama", "Tanggal masuk", "Tanggal kembali", "Keterangan"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(tabelDaftarPenyewa);
-
-        tEdit.setText("EDIT");
+        if (tabelDaftarPenyewa.getColumnModel().getColumnCount() > 0) {
+            tabelDaftarPenyewa.getColumnModel().getColumn(0).setResizable(false);
+            tabelDaftarPenyewa.getColumnModel().getColumn(1).setResizable(false);
+            tabelDaftarPenyewa.getColumnModel().getColumn(2).setResizable(false);
+            tabelDaftarPenyewa.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         tDelete.setText("DELETE");
         tDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +112,13 @@ public class daftarSewa extends javax.swing.JFrame {
             }
         });
 
+        tSave.setText("SAVE");
+        tSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,49 +131,36 @@ public class daftarSewa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tEdit)
-                                .addGap(62, 62, 62)
                                 .addComponent(tDelete)
-                                .addGap(67, 67, 67)
+                                .addGap(18, 18, 18)
                                 .addComponent(tDetail)
+                                .addGap(18, 18, 18)
+                                .addComponent(tSave)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tKembali))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tKembali)))))
                 .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tDelete)
-                    .addComponent(tDetail)
-                    .addComponent(tKembali)
-                    .addComponent(tEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tDelete)
+                        .addComponent(tDetail)
+                        .addComponent(tSave))
+                    .addComponent(tKembali))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tDetailActionPerformed
         // TODO add your handling code here:
@@ -186,6 +192,11 @@ public class daftarSewa extends javax.swing.JFrame {
         utama u = new utama();
         u.setVisible(true);
     }//GEN-LAST:event_tKembaliActionPerformed
+
+    private void tSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tSaveActionPerformed
+        // TODO add your handling code here:
+        saveData();
+    }//GEN-LAST:event_tSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,14 +234,44 @@ public class daftarSewa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton tDelete;
     private javax.swing.JButton tDetail;
-    private javax.swing.JButton tEdit;
     private javax.swing.JButton tKembali;
+    private javax.swing.JButton tSave;
     private javax.swing.JTable tabelDaftarPenyewa;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        modelTabelDaftarPenyewa.getDataVector().removeAllElements();
+        url = "src/Database/daftarPenyewa.txt";
+        file = new File(url);
+        try{
+            br = new BufferedReader(new FileReader(file));
+            Object[] lData = br.lines().toArray();
+            
+            for (Object lData1 : lData) {
+                String[] data = lData1.toString().split("\t");
+                modelTabelDaftarPenyewa.addRow(data);
+            }
+        }catch(IOException e){
+        }
+    }
+    
+    private void saveData(){
+        url = "src/Database/daftarPenyewa.txt";
+        file = new File(url);
+        try{
+            bw = new BufferedWriter(new FileWriter(file));
+            for(int i = 0;i < tabelDaftarPenyewa.getRowCount();i++){
+                for(int j = 0;j < tabelDaftarPenyewa.getColumnCount();j++){
+                    bw.write(tabelDaftarPenyewa.getValueAt(i, j).toString() + "\t");
+                }
+                bw.newLine();
+            }
+            bw.close();
+        }catch(IOException e){
+        }
+    }
 }

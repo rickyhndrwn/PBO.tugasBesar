@@ -14,8 +14,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,8 +41,13 @@ public class kasir extends javax.swing.JFrame {
     DefaultTableModel modelTabelDaftarBarang;
     DefaultTableModel modelTabelKasir;
     int total = 0, kembali = 0;
+    Date tanggal = new Date();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyy");
+        String stringTanggal = df.format(tanggal);
+        Date batasTanggal;
     
-    public kasir() {
+    public kasir() throws ParseException {
+        this.batasTanggal = new SimpleDateFormat("dd-MM-yyy").parse(stringTanggal);
         initComponents();
         
         setLocationRelativeTo(this);
@@ -49,10 +57,8 @@ public class kasir extends javax.swing.JFrame {
         modelTabelKasir = (DefaultTableModel)tabelKasir.getModel();
         data = new String[4];
         
-        Date tanggal = new Date();
-        DateFormat df = new SimpleDateFormat("dd-MM-yyy");
         
-        textTanggalPesanKasir.setText(df.format(tanggal));
+        textTanggalPesanKasir.setText(stringTanggal);
         
         loadData();
     }
@@ -88,9 +94,9 @@ public class kasir extends javax.swing.JFrame {
         tombolClear = new javax.swing.JButton();
         tombolKembali = new javax.swing.JButton();
         textTanggalPesanKasir = new javax.swing.JLabel();
-        textTanggalKembaliKasir = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelDaftarBarang = new javax.swing.JTable();
+        fieldTanggalKembali = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -240,6 +246,9 @@ public class kasir extends javax.swing.JFrame {
             tabelDaftarBarang.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        fieldTanggalKembali.setDateFormatString("dd-MM-yyy");
+        fieldTanggalKembali.setMinSelectableDate(batasTanggal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,43 +270,44 @@ public class kasir extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel9))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(fieldNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(fieldNoRegKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(fieldKodeKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(textTanggalKembaliKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(fieldNamaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel5))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(fieldNoRegKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel3)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(fieldJumlahKasir)
-                                            .addComponent(textTanggalPesanKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jLabel6)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(fieldTanggalKembali, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(fieldJumlahKasir, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textTanggalPesanKasir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tombolPesan, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                .addGap(129, 129, 129))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tombolPesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tombolKembali, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tombolClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(99, 99, 99)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tombolClear, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tombolKembali))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -324,14 +334,12 @@ public class kasir extends javax.swing.JFrame {
                                 .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textTanggalKembaliKasir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(fieldKodeKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(fieldKodeKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel9))
+                            .addComponent(fieldTanggalKembali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tombolTambah)
                             .addComponent(tombolCancel))
@@ -344,7 +352,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                             .addComponent(textTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tombolPesan)
                             .addComponent(tombolClear))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -369,7 +377,14 @@ public class kasir extends javax.swing.JFrame {
 
     private void tombolPesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolPesanActionPerformed
         // TODO add your handling code here:
-        
+        String nama = fieldNamaKasir.getText();
+        Date tanggal = new Date();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyy");
+        String stringTanggal = df.format(tanggal);
+        String tanggalKembali = fieldTanggalKembali.getToolTipText();
+        saveDataPesan(nama, stringTanggal, tanggalKembali);
+//        daftarSewa daftarSewa = new daftarSewa(nama, stringTanggal);
+//        System.out.println(nama +" "+ stringTanggal);
     }//GEN-LAST:event_tombolPesanActionPerformed
 
     private void fieldKodeKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldKodeKasirActionPerformed
@@ -438,7 +453,11 @@ public class kasir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new kasir().setVisible(true);
+                try {
+                    new kasir().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(kasir.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -448,6 +467,7 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JTextField fieldKodeKasir;
     private javax.swing.JTextField fieldNamaKasir;
     private javax.swing.JTextField fieldNoRegKasir;
+    private com.toedter.calendar.JDateChooser fieldTanggalKembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -461,7 +481,6 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tabelDaftarBarang;
     private javax.swing.JTable tabelKasir;
-    private javax.swing.JLabel textTanggalKembaliKasir;
     private javax.swing.JLabel textTanggalPesanKasir;
     private javax.swing.JLabel textTotal;
     private javax.swing.JButton tombolCancel;
@@ -490,8 +509,6 @@ public class kasir extends javax.swing.JFrame {
     private void klikTabelDaftarBarang() {
         fieldKodeKasir.setText("");
         fieldKodeKasir.setText(tabelDaftarBarang.getValueAt(tabelDaftarBarang.getSelectedRow(), 0).toString());
-        fieldNamaKasir.setText("");
-        fieldNamaKasir.setText(tabelDaftarBarang.getValueAt(tabelDaftarBarang.getSelectedRow(), 1).toString());
     }
 
     private void klikTombolTambah() {
@@ -540,7 +557,7 @@ public class kasir extends javax.swing.JFrame {
     }
 
     private void saveData() {
-        url = "src/tabel/Tabel.txt";
+        url = "src/Database/stok.txt";
         file = new File(url);
         try{
             bw = new BufferedWriter(new FileWriter(file));
@@ -550,6 +567,18 @@ public class kasir extends javax.swing.JFrame {
                 }
                 bw.newLine();
             }
+            bw.close();
+        }catch(IOException e){
+        }
+    }
+    
+    private void saveDataPesan(String nama, String stringTanggal, String tanggalKembali){
+        url = "src/Database/daftarPenyewa.txt";
+        file = new File(url);
+        try{
+            bw = new BufferedWriter(new FileWriter(file, true));
+            bw.write(nama+"\t"+stringTanggal+"\t"+tanggalKembali);
+            bw.newLine();
             bw.close();
         }catch(IOException e){
         }

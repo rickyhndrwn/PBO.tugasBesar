@@ -1,8 +1,7 @@
-001	Main Frame	10	500	
-002	Cross Brace	15	250
-003	Ladder Frame	100	500
-004	Catwalk	250	500
-005	Jack Base	25	250
-006	U-Head	500	250
-007	Joint Pin	500	250
-
+001	Main Frame	106	90	
+002	Cross Brase	15	250	
+003	Ladder Frame	150	500	
+004	Catwalk	250	500	
+005	Jack Base	23	250	
+006	U-Head	250	250	
+007	Joint Pin	500	250	
