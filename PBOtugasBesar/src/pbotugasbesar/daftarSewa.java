@@ -168,6 +168,7 @@ public class daftarSewa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Harap Pilih Baris!", "Perhatian", HEIGHT);
         }
         else{
+            
             dispose();
             DETAIL d = new DETAIL();
             d.setVisible(true);
