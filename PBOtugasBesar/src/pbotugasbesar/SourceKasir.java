@@ -154,8 +154,8 @@ public class SourceKasir {
     protected void klikTombolPesan() {
         String tanggalKembali = "";
         tanggalKembali = df.format(kasir.fieldTanggalKembali.getDate());
-        if(total == 0){
-            JOptionPane.showMessageDialog(null, "Harap Pilih Barang!", "Perhatian", HEIGHT);
+        if(total == 0 || kasir.fieldNamaKasir.equals("") || kasir.fieldNoRegKasir.equals("")){
+            JOptionPane.showMessageDialog(null, "Harap Pilih Barang atau Lengkapi Data!", "Perhatian", HEIGHT);
         }
         else{
             String nama = kasir.fieldNamaKasir.getText();
@@ -166,9 +166,8 @@ public class SourceKasir {
             kasir.fieldKodeKasir.setText("");
             kasir.fieldJumlahKasir.setText("");
             kasir.fieldTanggalKembali.setDate(null);
-            for(int i = 0;i <= kasir.tabelKasir.getRowCount();i++){
-                kasir.modelTabelKasir.removeRow(i);
-            }
+            kasir.modelTabelKasir.getDataVector().removeAllElements();
+            kasir.modelTabelKasir.fireTableDataChanged();
             kasir.textTotal.setText("Rp. 0");
             total = 0;
         }
