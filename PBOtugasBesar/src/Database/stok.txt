@@ -1,5 +1,5 @@
 001	Main Frame	500	100	
-002	Cross Brase	500	250	
+002	Cross Brase	480	250	
 003	Ladder Frame	500	500	
 004	Catwalk	500	500	
 005	Jack Base	500	250	

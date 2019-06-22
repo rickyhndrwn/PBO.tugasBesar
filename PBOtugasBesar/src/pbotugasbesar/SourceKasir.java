@@ -166,7 +166,7 @@ public class SourceKasir {
             kasir.fieldKodeKasir.setText("");
             kasir.fieldJumlahKasir.setText("");
             kasir.fieldTanggalKembali.setDate(null);
-            for(int i = 0;i <= kasir.tabelKasir.getRowCount() + 1;i++){
+            for(int i = 0;i <= kasir.tabelKasir.getRowCount();i++){
                 kasir.modelTabelKasir.removeRow(i);
             }
             kasir.textTotal.setText("Rp. 0");
