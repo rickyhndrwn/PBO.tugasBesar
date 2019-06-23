@@ -48,7 +48,6 @@ public class SourceJumlahStok {
         else{
             int line = jS.tabelStok.getSelectedRow();
             jS.modelTabelStok.removeRow(line);
-            
         }
     }
     

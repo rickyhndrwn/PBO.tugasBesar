@@ -66,27 +66,26 @@ public class SourceKasir {
         }
     }
     
-    protected void saveDataPesan(String nama, String stringTanggal, String tanggalKembali){
+    protected void saveDataPesan(String nama, String noReg, String stringTanggal, String tanggalKembali){
         url = "src/Database/daftarPenyewa.txt";
         file = new File(url);
         try{
             bw = new BufferedWriter(new FileWriter(file, true));
-            bw.write(nama+"\t"+stringTanggal+"\t"+tanggalKembali);
+            bw.write(noReg+"\t"+nama+"\t"+stringTanggal+"\t"+tanggalKembali+"\tbelum");
             bw.newLine();
             bw.close();
         }catch(IOException e){
         }
     }
     
-    protected void saveDataDipinjam(String nama){
+    protected void saveDataDipinjam(String nama, String noReg){
         url = "src/Database/barangDipinjam.txt";
         file = new File(url);
         try{
             bw = new BufferedWriter(new FileWriter(file, true));
             for(int i = 0;i < kasir.tabelKasir.getRowCount();i++){
-                bw.write(nama + "\t");
+                bw.write(noReg + "\t" + nama + "\t");
                 for(int j = 1;j < kasir.tabelKasir.getColumnCount() - 1;j++){
-                    
                     bw.write(kasir.tabelKasir.getValueAt(i, j).toString() + "\t");
                 }
                 bw.newLine();
@@ -97,20 +96,20 @@ public class SourceKasir {
     }
 
     protected void klikTabelDaftarBarang() {
-        kasir.fieldKodeKasir.setText("");
-        kasir.fieldKodeKasir.setText(kasir.tabelDaftarBarang.getValueAt(kasir.tabelDaftarBarang.getSelectedRow(), 0).toString());
+        kasir.textKodeKasir.setText("");
+        kasir.textKodeKasir.setText(kasir.tabelDaftarBarang.getValueAt(kasir.tabelDaftarBarang.getSelectedRow(), 0).toString());
     }
 
     protected void klikTombolClear() {
         kasir.fieldNoRegKasir.setText("");
         kasir.fieldNamaKasir.setText("");
-        kasir.fieldKodeKasir.setText("");
+        kasir.textKodeKasir.setText("");
         kasir.fieldJumlahKasir.setText("");
     }
     
     protected void klikTombolTambah() {
         String[] data2 = new String[4];
-        String kodeBarang = kasir.fieldKodeKasir.getText();
+        String kodeBarang = kasir.textKodeKasir.getText();
         String stringJumlahBarang = kasir.fieldJumlahKasir.getText();
         int jumlahBarang = Integer.parseInt(stringJumlahBarang);
         String namaBarang = "";
@@ -159,11 +158,12 @@ public class SourceKasir {
         }
         else{
             String nama = kasir.fieldNamaKasir.getText();
-            saveDataDipinjam(nama);
-            saveDataPesan(nama, stringTanggal, tanggalKembali);
+            String noReg = kasir.fieldNoRegKasir.getText();
+            saveDataDipinjam(nama, noReg);
+            saveDataPesan(nama, noReg, stringTanggal, tanggalKembali);
             kasir.fieldNoRegKasir.setText("");
             kasir.fieldNamaKasir.setText("");
-            kasir.fieldKodeKasir.setText("");
+            kasir.textKodeKasir.setText("");
             kasir.fieldJumlahKasir.setText("");
             kasir.fieldTanggalKembali.setDate(null);
             kasir.modelTabelKasir.getDataVector().removeAllElements();

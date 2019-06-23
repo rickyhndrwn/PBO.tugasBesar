@@ -1,0 +1,8 @@
+1	Pak Joko	Main Frame	100	
+1	Pak Joko	Cross Brace	100
+1	Pak Joko	Catwalk	100
+1	Pak Joko	Jack Base	100	
+2	Pak Joni	Main Frame	100	
+03	Pak Heru	Ladder Frame	10	
+03	Pak Heru	U-Head	10	
+03	Pak Heru	U-Head	10	
