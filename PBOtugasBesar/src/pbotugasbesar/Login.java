@@ -5,7 +5,6 @@ package pbotugasbesar;
  * @author ASUS
  */
 public class Login extends javax.swing.JFrame {
-    
     SourceLogin sL = new SourceLogin(this);
     
     public Login() {

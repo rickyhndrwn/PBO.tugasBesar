@@ -9,8 +9,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,9 +29,11 @@ public class SourceKasir {
     BufferedWriter bw;
     FileWriter fw;
     int total = 0, kembali = 0;
-    Date tanggal = new Date();
     DateFormat df = new SimpleDateFormat("dd-MM-yyy");
-    String stringTanggal = df.format(tanggal);
+    Date tanggalMasuk = new Date();
+    
+    String stringTanggal = df.format(tanggalMasuk);
+    String tanggalKembali = "";
     Kasir kasir;
     
     protected SourceKasir(Kasir kasir) {
@@ -101,13 +107,12 @@ public class SourceKasir {
     }
 
     protected void klikTombolClear() {
-        kasir.fieldNoRegKasir.setText("");
-        kasir.fieldNamaKasir.setText("");
         kasir.textKodeKasir.setText("");
         kasir.fieldJumlahKasir.setText("");
+        
     }
     
-    protected void klikTombolTambah() {
+    protected void klikTombolTambah() throws ParseException {
         String[] data2 = new String[4];
         String kodeBarang = kasir.textKodeKasir.getText();
         String stringJumlahBarang = kasir.fieldJumlahKasir.getText();
@@ -140,7 +145,13 @@ public class SourceKasir {
                 data2[3] = "" + (hargaBarang * jumlahBarang);
                 kasir.modelTabelKasir.addRow(data2);
                 total += (hargaBarang * jumlahBarang);
-                kasir.textTotal.setText("Rp. " + total);
+                tanggalKembali = df.format(kasir.fieldTanggalKembali.getDate());
+                Date tanggalK = df.parse(tanggalKembali);
+                tanggalMasuk = df.parse(stringTanggal);
+                long hari = tanggalK.getTime() - tanggalMasuk.getTime();
+                int lamaHari = (int) TimeUnit.DAYS.convert(hari, TimeUnit.MILLISECONDS);
+                System.out.println(""+lamaHari);
+                kasir.textTotal.setText("Rp. " + total + "/hari");
                 kasir.tabelDaftarBarang.setSelectionMode(1);
                 saveData();
             }
@@ -151,7 +162,6 @@ public class SourceKasir {
     }
     
     protected void klikTombolPesan() {
-        String tanggalKembali = "";
         tanggalKembali = df.format(kasir.fieldTanggalKembali.getDate());
         if(total == 0 || kasir.fieldNamaKasir.equals("") || kasir.fieldNoRegKasir.equals("")){
             JOptionPane.showMessageDialog(null, "Harap Pilih Barang atau Lengkapi Data!", "Perhatian", HEIGHT);
