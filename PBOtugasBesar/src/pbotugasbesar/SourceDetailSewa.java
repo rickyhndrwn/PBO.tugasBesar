@@ -58,7 +58,6 @@ public class SourceDetailSewa {
             for (int i = 0; i < lData2.length; i++) {
                 String[] data2 = lData2[i].toString().split("\t");
                 if (data2[0].equals(noReg) && data2[1].equals(nama)){
-                    System.out.println(data2[2]+" "+data2[3]);
                     detailS.modelTabelDetailSewa.addRow(new Object[]{"", ""});
                     detailS.modelTabelDetailSewa.setValueAt(data2[2], i, 0);
                     detailS.modelTabelDetailSewa.setValueAt(data2[3], i, 1);

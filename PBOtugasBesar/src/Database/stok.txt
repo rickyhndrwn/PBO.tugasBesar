@@ -1,6 +1,6 @@
 002	Cross Brase	360	250	
-003	Ladder Frame	480	500	
+003	Ladder Frame	470	500	
 004	Catwalk	480	500	
 005	Jack Base	500	250	
-006	U-Head	470	250	
+006	U-Head	410	250	
 007	Joint Pin	500	250	

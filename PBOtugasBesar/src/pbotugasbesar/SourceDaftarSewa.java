@@ -21,7 +21,7 @@ public class SourceDaftarSewa {
     BufferedReader br;
     BufferedWriter bw;
     FileWriter fw;
-    String nama, stringTanggal;
+    String nama = "", stringTanggal, noReg = "";
     DaftarSewa dS;
     
     protected SourceDaftarSewa(DaftarSewa dS){

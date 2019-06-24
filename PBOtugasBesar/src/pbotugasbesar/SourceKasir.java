@@ -150,8 +150,8 @@ public class SourceKasir {
                 tanggalMasuk = df.parse(stringTanggal);
                 long hari = tanggalK.getTime() - tanggalMasuk.getTime();
                 int lamaHari = (int) TimeUnit.DAYS.convert(hari, TimeUnit.MILLISECONDS);
-                System.out.println(""+lamaHari);
                 kasir.textTotal.setText("Rp. " + total + "/hari");
+                kasir.textTotalSemua.setText("Rp. " + total*lamaHari);
                 kasir.tabelDaftarBarang.setSelectionMode(1);
                 saveData();
             }
